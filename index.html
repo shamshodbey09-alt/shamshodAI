@@ -1,0 +1,79 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>SHAMSHOD.AI</title>
+    <style>
+        body {
+            background: #0d1117;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .chat-box {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            background: #161b22;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .msg {
+            margin: 10px 0;
+            padding: 10px;
+            background: #21262d;
+            border-radius: 8px;
+        }
+        .user { background: #1f6feb; }
+    </style>
+</head>
+<body>
+
+    <h1>🤖 SHAMSHOD.AI</h1>
+    <div class="chat-box" id="chat"></div>
+
+    <input type="text" id="input" placeholder="Xabar yozing..." 
+           style="width: 80%; padding: 10px; margin-top: 20px;">
+    <button onclick="send()" style="padding: 10px;">Yuborish</button>
+
+    <script>
+        function addMessage(text, isUser = false) {
+            let chat = document.getElementById("chat");
+            let msg = document.createElement("div");
+            msg.className = "msg" + (isUser ? " user" : "");
+            msg.innerText = text;
+            chat.appendChild(msg);
+            chat.scrollTop = chat.scrollHeight;
+        }
+
+        function shamshodAI(text) {
+            text = text.toLowerCase();
+
+            // O'zbekcha javoblar
+            if (text.includes("salom")) return "Salom! Men SHAMSHOD.AI. Qanday yordam kerak?";
+            if (text.includes("qalesan")) return "Yaxshi, sizchi?";
+            if (text.includes("isming")) return "Mening ismim SHAMSHOD.AI 😊";
+
+            // Ruscha javoblar
+            if (text.includes("привет")) return "Привет! Я SHAMSHOD.AI. Чем могу помочь?";
+            if (text.includes("как дела")) return "У меня всё хорошо!";
+
+            // Default javob
+            return "Hozircha shuncha bilaman 😊 Yana nimadir sorang!";
+        }
+
+        function send() {
+            let input = document.getElementById("input");
+            let text = input.value.trim();
+            if (!text) return;
+
+            addMessage(text, true);
+            let reply = shamshodAI(text);
+            setTimeout(() => addMessage(reply), 300);
+
+            input.value = "";
+        }
+    </script>
+
+</body>
+</html>
